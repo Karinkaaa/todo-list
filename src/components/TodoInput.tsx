@@ -1,16 +1,38 @@
-import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Add } from "@mui/icons-material";
+import { Box, Button, TextField } from "@mui/material";
+import React from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { addTodo } from "../redux/todoSlice";
 
 export const TodoInput: React.FC = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = React.useState("");
+  const dispatch = useAppDispatch();
+
+  const handleAddTodo = (name: string) => {
+    if (name.trim()) {
+      dispatch(addTodo(name));
+      setValue("");
+    }
+  };
 
   return (
-    <TextField
-      fullWidth
-      placeholder="Enter the thing you need to do:"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      onKeyDown={() => console.log(value)}
-    />
+    <Box sx={{ display: "flex" }}>
+      <TextField
+        label="Enter the thing you need to do:"
+        variant="outlined"
+        fullWidth
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyPress={(e) => e.key === "Enter" && handleAddTodo(value)}
+      />
+      <Button
+        variant="contained"
+        endIcon={<Add />}
+        sx={{ ml: 1 }}
+        onClick={() => handleAddTodo(value)}
+      >
+        Add
+      </Button>
+    </Box>
   );
 };
