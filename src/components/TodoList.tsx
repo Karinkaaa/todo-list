@@ -1,6 +1,7 @@
-import { List, ListItem } from "@mui/material";
+import { List } from "@mui/material";
 import React from "react";
 import { useTodos } from "../redux/hooks";
+import { Todo } from "./Todo";
 
 export const TodoList: React.FC = () => {
   const todos = useTodos();
@@ -8,7 +9,7 @@ export const TodoList: React.FC = () => {
   return (
     <List>
       {todos.map((todo) => (
-        <ListItem key={todo.id}>{todo.name}</ListItem>
+        <Todo key={todo.id} todo={todo} />
       ))}
     </List>
   );
