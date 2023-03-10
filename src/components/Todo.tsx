@@ -1,4 +1,4 @@
-import { Delete, DoneAll, Edit } from "@mui/icons-material";
+import { Check, Delete, DoneAll, Edit } from "@mui/icons-material";
 import {
   Checkbox,
   IconButton,
@@ -57,18 +57,20 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
   return (
     <ListItem
       key={id}
-      onClick={(e) => console.log(e)}
       sx={{
-        bgcolor: completed ? "primary.light" : "warning.light",
+        bgcolor: completed ? "primary.light" : "secondary.light",
         borderRadius: 3,
         marginBottom: 1,
+        "&:hover": {
+          boxShadow: completed ? "#6311df 0 1px 2px" : "#056042 0 1px 2px"
+        },
       }}
     >
       <IconButton onClick={handleToggleCheckbox}>
         <Checkbox
           checked={completed}
           checkedIcon={<DoneAll />}
-          color="secondary"
+          sx={{ color: completed ? "primary.dark" : "secondary.main" }}
         />
       </IconButton>
       <ListItemText>
@@ -98,12 +100,15 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         disabled={completed}
         onClick={handleToggleEditButton}
       >
-        <Edit sx={{ color: completed ? "gray[500]" : "secondary.main" }} />
+        {isReadonly ? (
+          <Edit sx={{ color: completed ? "gray[500]" : "secondary.main" }} />
+        ) : (
+          <Check color="secondary" />
+        )}
       </IconButton>
       <IconButton sx={{ mr: 1 }} onClick={handleRemoveTodo}>
-        <Delete sx={{ color: "error.dark" }} />
+        <Delete sx={{ color: "primary.dark" }} />
       </IconButton>
     </ListItem>
   );
 };
-

@@ -10,7 +10,7 @@ export const App: React.FC = () => {
 
   return (
     <>
-      <TodoNavigation setSelector={setSelector} />
+      <TodoNavigation selector={selector} setSelector={setSelector} />
       <TodoContainer todos={useTodos(selector)} />
     </>
   );

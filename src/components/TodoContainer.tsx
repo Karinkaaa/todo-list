@@ -10,7 +10,7 @@ interface TodoContainerProps {
 
 export const TodoContainer: React.FC<TodoContainerProps> = ({ todos }) => {
   return (
-    <Container sx={{ mt: 6, width: "50%" }}>
+    <Container sx={{ mt: 6, mb: 5, width: "50%" }}>
       <TodoInput />
       <TodoList todos={todos} />
     </Container>

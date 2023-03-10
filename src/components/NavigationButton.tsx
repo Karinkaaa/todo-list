@@ -14,7 +14,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
 }) => {
   const buttonSx = {
     "&:hover": {
-      backgroundColor: "primary.dark",
+      backgroundColor: "primary.main",
     },
   };
 
@@ -28,4 +28,3 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
     </Button>
   );
 };
-

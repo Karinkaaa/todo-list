@@ -16,10 +16,9 @@ export const TodoInput: React.FC = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", mb: 5 }}>
       <TextField
         label="Enter the thing you need to do:"
-        variant="outlined"
         fullWidth
         value={value}
         onChange={(e) => setValue(e.target.value)}
