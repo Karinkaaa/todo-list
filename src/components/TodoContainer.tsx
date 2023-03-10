@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import React from "react";
 import { ITodo } from "../types";
 import { TodoInput } from "./TodoInput";
@@ -12,7 +12,11 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({ todos }) => {
   return (
     <Container sx={{ mt: 6, mb: 5, width: "50%" }}>
       <TodoInput />
-      <TodoList todos={todos} />
+      {todos.length ? (
+        <TodoList todos={todos} />
+      ) : (
+        <Typography sx={{ ml: 1 }}>No todos yet...</Typography>
+      )}
     </Container>
   );
 };

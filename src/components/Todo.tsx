@@ -88,7 +88,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
           error={value.trim() === ""}
           helperText={
             value.trim() === ""
-              ? "Please, enter the todo name!"
+              ? "Please, enter the todo name"
               : new Date(createdAt).toLocaleDateString("ua")
           }
           onChange={(e) => setValue(e.target.value)}

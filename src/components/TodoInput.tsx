@@ -5,13 +5,17 @@ import { useAppDispatch } from "../redux/hooks";
 import { addTodo } from "../redux/todoSlice";
 
 export const TodoInput: React.FC = () => {
-  const [value, setValue] = React.useState("");
   const dispatch = useAppDispatch();
+  const [value, setValue] = React.useState("");
+  const [isTouched, setIsTouched] = React.useState(false);
 
   const handleAddTodo = (name: string) => {
     if (name.trim()) {
       dispatch(addTodo(name));
       setValue("");
+      setIsTouched(false);
+    } else {
+      setIsTouched(true);
     }
   };
 
@@ -21,13 +25,17 @@ export const TodoInput: React.FC = () => {
         label="Enter the thing you need to do:"
         fullWidth
         value={value}
+        error={isTouched && value.trim() === ""}
+        helperText={
+          value.trim() === "" && isTouched ? "Please, enter the todo name" : ""
+        }
         onChange={(e) => setValue(e.target.value)}
         onKeyPress={(e) => e.key === "Enter" && handleAddTodo(value)}
       />
       <Button
         variant="contained"
         endIcon={<Add />}
-        sx={{ ml: 1 }}
+        sx={{ ml: 1, height: 56 }}
         onClick={() => handleAddTodo(value)}
       >
         Add
