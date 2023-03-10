@@ -1,3 +1,5 @@
+import { TODO_TYPE } from "./enums";
+
 export interface ITodo {
   id: string;
   name: string;
@@ -8,3 +10,5 @@ export interface ITodo {
 export interface ITodos {
   items: ITodo[];
 }
+
+export type SelectorType = `${TODO_TYPE}`;
