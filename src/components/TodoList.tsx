@@ -1,11 +1,13 @@
 import { List } from "@mui/material";
 import React from "react";
-import { useTodos } from "../redux/hooks";
+import { ITodo } from "../types";
 import { Todo } from "./Todo";
 
-export const TodoList: React.FC = () => {
-  const todos = useTodos();
+interface TodoListProps {
+  todos: ITodo[];
+}
 
+export const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <List>
       {todos.map((todo) => (
