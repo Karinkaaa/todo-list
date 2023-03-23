@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
+import { TODO_TYPE } from "../enums";
 import { ITodos } from "../types";
 
 const initialState: ITodos = {
   items: JSON.parse(localStorage.getItem("todos") || "[]"),
+  page: 0,
+  limit: 5,
+  selector: TODO_TYPE.ALL,
 };
 
 export const todoSlice = createSlice({
@@ -30,8 +34,20 @@ export const todoSlice = createSlice({
         localStorage.setItem("todos", JSON.stringify(state.items));
       }
     },
+    setPage: (state, action) => {
+      state.page = action.payload;
+    },
+    setLimit: (state, action) => {
+      state.limit = action.payload;
+      state.page = 0;
+    },
+    setSelector: (state, action) => {
+      state.selector = action.payload;
+      state.page = 0;
+    },
   },
 });
 
-export const { addTodo, removeTodo, editTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, editTodo, setPage, setLimit, setSelector } =
+  todoSlice.actions;
 export const todoReducer = todoSlice.reducer;

@@ -3,20 +3,19 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { TODO_TYPE } from "../enums";
-import { useTodosCount } from "../redux/hooks";
+import { useAppDispatch, useAppSelector, useTodosCount } from "../redux/hooks";
+import { setSelector } from "../redux/todoSlice";
 import { SelectorType } from "../types";
 import { NavigationButton } from "./NavigationButton";
 
-interface TodoNavigationProps {
-  selector: SelectorType;
-  setSelector: (selector: SelectorType) => void;
-}
-
-export const TodoNavigation: React.FC<TodoNavigationProps> = ({
-  selector,
-  setSelector,
-}) => {
+export const TodoNavigation: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const selector = useAppSelector((state) => state.todos.selector);
   const { all, active, completed } = useTodosCount();
+
+  const handleChangeSelector = (value: SelectorType) => {
+    dispatch(setSelector(value));
+  };
 
   return (
     <>
@@ -24,7 +23,7 @@ export const TodoNavigation: React.FC<TodoNavigationProps> = ({
         sx={{ boxShadow: "0 0 7px 2px rebeccapurple", bgcolor: "primary.dark" }}
       >
         <Toolbar>
-          <img style={{ width: "35px" }} src="logo.png" />
+          <img style={{ width: "35px" }} src="/logo.png" alt="logo" />
           <Typography
             variant="h6"
             component="div"
@@ -32,10 +31,9 @@ export const TodoNavigation: React.FC<TodoNavigationProps> = ({
           >
             Todo List
           </Typography>
-
           <NavigationButton
             label={`All (${all})`}
-            handleClickButton={() => setSelector(TODO_TYPE.ALL)}
+            handleClickButton={() => handleChangeSelector(TODO_TYPE.ALL)}
             sx={{
               borderBottom: selector === TODO_TYPE.ALL ? "outset" : "none",
             }}
@@ -47,11 +45,11 @@ export const TodoNavigation: React.FC<TodoNavigationProps> = ({
               mr: 3,
               borderBottom: selector === TODO_TYPE.ACTIVE ? "outset" : "none",
             }}
-            handleClickButton={() => setSelector(TODO_TYPE.ACTIVE)}
+            handleClickButton={() => handleChangeSelector(TODO_TYPE.ACTIVE)}
           />
           <NavigationButton
             label={`Completed (${completed})`}
-            handleClickButton={() => setSelector(TODO_TYPE.COMPLETED)}
+            handleClickButton={() => handleChangeSelector(TODO_TYPE.COMPLETED)}
             sx={{
               borderBottom:
                 selector === TODO_TYPE.COMPLETED ? "outset" : "none",
@@ -59,7 +57,7 @@ export const TodoNavigation: React.FC<TodoNavigationProps> = ({
           />
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" />
+      <Toolbar />
     </>
   );
 };

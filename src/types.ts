@@ -7,8 +7,11 @@ export interface ITodo {
   completed: boolean;
 }
 
+export type SelectorType = `${TODO_TYPE}`;
+
 export interface ITodos {
   items: ITodo[];
+  page: number;
+  limit: number;
+  selector: SelectorType;
 }
-
-export type SelectorType = `${TODO_TYPE}`;
