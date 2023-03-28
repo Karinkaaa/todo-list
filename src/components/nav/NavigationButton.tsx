@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-interface NavigationButtonProps {
+interface Props {
   label: string;
   sx?: { [key: string]: string | number };
   handleClickButton: () => void;
 }
 
-export const NavigationButton: React.FC<NavigationButtonProps> = ({
+export const NavigationButton: React.FC<Props> = ({
   label,
   sx = {},
   handleClickButton,

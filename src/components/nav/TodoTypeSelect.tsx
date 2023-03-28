@@ -6,10 +6,10 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import React from "react";
-import { TODO_TYPE } from "../enums";
-import { useAppDispatch, useAppSelector, useTodosCount } from "../redux/hooks";
-import { setSelector } from "../redux/todoSlice";
-import { SelectorType } from "../types";
+import { TODO_TYPE } from "../../enums";
+import { useAppDispatch, useAppSelector, useTodosCount } from "../../redux/hooks";
+import { setSelector } from "../../redux/todoSlice";
+import { SelectorType } from "../../types";
 
 export const TodoTypeSelect: React.FC = () => {
   const dispatch = useAppDispatch();

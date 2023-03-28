@@ -1,5 +1,5 @@
-import { TodoContainer } from "./components/TodoContainer";
-import { TodoNavigation } from "./components/TodoNavigation";
+import { TodoContainer } from "../todos/TodoContainer";
+import { TodoNavigation } from "../nav/TodoNavigation";
 
 export const App: React.FC = () => {
   return (

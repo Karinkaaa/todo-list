@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
-import { TODO_TYPE } from "../enums";
+import { TODO_PRIORITY, TODO_TYPE } from "../enums";
 import { ITodos } from "../types";
 
 const initialState: ITodos = {
@@ -8,6 +8,7 @@ const initialState: ITodos = {
   page: 0,
   limit: 5,
   selector: TODO_TYPE.ALL,
+  priority: TODO_PRIORITY.NONE,
 };
 
 export const todoSlice = createSlice({
@@ -15,11 +16,13 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
+      const { name, priority } = action.payload;
       state.items.push({
         id: uuid(),
-        name: action.payload,
+        name,
         createdAt: new Date().toJSON(),
         completed: false,
+        priority,
       });
       localStorage.setItem("todos", JSON.stringify(state.items));
     },
@@ -45,9 +48,19 @@ export const todoSlice = createSlice({
       state.selector = action.payload;
       state.page = 0;
     },
+    setPriority: (state, action) => {
+      state.priority = action.payload;
+    },
   },
 });
 
-export const { addTodo, removeTodo, editTodo, setPage, setLimit, setSelector } =
-  todoSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  editTodo,
+  setPage,
+  setLimit,
+  setSelector,
+  setPriority,
+} = todoSlice.actions;
 export const todoReducer = todoSlice.reducer;

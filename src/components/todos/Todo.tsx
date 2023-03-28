@@ -1,27 +1,33 @@
 import { Check, Delete, DoneAll, Edit } from "@mui/icons-material";
 import {
+  Box,
   Checkbox,
   IconButton,
   ListItem,
   ListItemText,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useRef } from "react";
-import { useAppDispatch } from "../redux/hooks";
-import { editTodo, removeTodo } from "../redux/todoSlice";
-import { ITodo } from "../types";
+import React, { useEffect, useRef, useState } from "react";
+import { TODO_PRIORITY } from "../../enums";
+import { useAppDispatch } from "../../redux/hooks";
+import { editTodo, removeTodo } from "../../redux/todoSlice";
+import { ITodo } from "../../types";
+import { HighPriorityChip } from "../priority/chips/HighPriorityChip";
+import { LowPriorityChip } from "../priority/chips/LowPriorityChip";
+import { MediumPriorityChip } from "../priority/chips/MediumPriorityChip";
+import { NonePriorityChip } from "../priority/chips/NonePriorityChip";
 
-interface TodoProps {
+interface Props {
   todo: ITodo;
 }
 
-export const Todo: React.FC<TodoProps> = ({ todo }) => {
+export const Todo: React.FC<Props> = ({ todo }) => {
   const ref = useRef<any>(null);
   const dispatch = useAppDispatch();
 
-  const { id, name, createdAt, completed } = todo;
-  const [value, setValue] = React.useState<string>(name);
-  const [isReadonly, setIsReadonly] = React.useState<boolean>(true);
+  const { id, name, createdAt, completed, priority } = todo;
+  const [value, setValue] = useState<string>(name);
+  const [isReadonly, setIsReadonly] = useState<boolean>(true);
 
   useEffect(() => {
     setValue(name);
@@ -32,7 +38,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
   };
 
   const handleEditTodo = () => {
-    const trimmedValue = value.trim();
+    const trimmedValue = value?.trim();
 
     if (trimmedValue) {
       dispatch(editTodo({ id, name: trimmedValue }));
@@ -53,6 +59,20 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
   const handleToggleCheckbox = () => {
     dispatch(editTodo({ id, completed: !completed }));
   };
+
+  const getPriorityChip = () => {
+    if (priority === TODO_PRIORITY.HIGH) {
+      return <HighPriorityChip />;
+    } else if (priority === TODO_PRIORITY.MEDIUM) {
+      return <MediumPriorityChip />;
+    } else if (priority === TODO_PRIORITY.LOW) {
+      return <LowPriorityChip />;
+    } else {
+      return <NonePriorityChip />;
+    }
+  };
+
+  const priorityChip = getPriorityChip();
 
   return (
     <ListItem
@@ -92,9 +112,9 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
           fullWidth
           multiline
           value={value}
-          error={value.trim() === ""}
+          error={value?.trim() === ""}
           helperText={
-            value.trim() === ""
+            value?.trim() === ""
               ? "Please, enter the todo name"
               : new Date(createdAt).toLocaleDateString("ua")
           }
@@ -102,6 +122,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
           onKeyDown={(e) => e.key === "Enter" && handleEditTodo()}
         />
       </ListItemText>
+      <Box sx={{ ml: 2 }}>{priorityChip}</Box>
       <IconButton
         sx={{ ml: 1 }}
         disabled={completed}

@@ -1,7 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
-import { useAppSelector, useTodos } from "../redux/hooks";
-import { TodoInput } from "./TodoInput";
+import { useAppSelector, useTodos } from "../../redux/hooks";
+import { TodoInput } from "../input/TodoInput";
 import { TodoList } from "./TodoList";
 
 export const TodoContainer: React.FC = () => {

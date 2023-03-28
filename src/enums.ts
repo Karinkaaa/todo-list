@@ -1,5 +1,12 @@
 export enum TODO_TYPE {
-  ALL = "all",
-  ACTIVE = "active",
-  COMPLETED = "completed",
+  ALL = "All",
+  ACTIVE = "Active",
+  COMPLETED = "Completed",
+}
+
+export enum TODO_PRIORITY {
+  HIGH = "High",
+  MEDIUM = "Medium",
+  LOW = "Low",
+  NONE = "None",
 }
