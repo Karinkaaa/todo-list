@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../../../src/assets/logo.png";
 import { TODO_TYPE } from "../../enums";
 import { useAppDispatch, useAppSelector, useTodosCount } from "../../redux/hooks";
 import { setSelector } from "../../redux/todoSlice";
