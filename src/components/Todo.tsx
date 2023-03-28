@@ -61,8 +61,9 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         bgcolor: completed ? "primary.light" : "secondary.light",
         borderRadius: 3,
         marginBottom: 1,
+        boxShadow: 1,
         "&:hover": {
-          boxShadow: completed ? "#6311df 0 1px 2px" : "#056042 0 1px 2px"
+          boxShadow: 5,
         },
       }}
     >
@@ -79,7 +80,13 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
             readOnly: isReadonly,
             ref,
             disableUnderline: isReadonly,
-            sx: { textDecoration: completed ? "line-through" : "none" },
+            sx: {
+              textDecoration: completed ? "line-through" : "none",
+              cursor: isReadonly ? "default" : "inherit",
+            },
+          }}
+          inputProps={{
+            sx: { cursor: isReadonly ? "default" : "inherit" },
           }}
           variant="standard"
           fullWidth

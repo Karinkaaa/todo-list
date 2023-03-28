@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import React from "react";
 import { usePaginationActions } from "../redux/hooks";
@@ -14,6 +15,8 @@ export const TodoPagination: React.FC<TablePaginationProps> = ({
   count,
 }) => {
   const { changePage, changeRowsPerPage } = usePaginationActions();
+  const theme = useTheme();
+  const xs = useMediaQuery(theme.breakpoints.down(400));
 
   return (
     <TablePagination
@@ -22,6 +25,7 @@ export const TodoPagination: React.FC<TablePaginationProps> = ({
       page={page}
       onPageChange={changePage}
       rowsPerPage={limit}
+      labelRowsPerPage={xs ? "" : "Rows per page:"}
       rowsPerPageOptions={[5, 10, 25, 50, 100]}
       onRowsPerPageChange={changeRowsPerPage}
     />

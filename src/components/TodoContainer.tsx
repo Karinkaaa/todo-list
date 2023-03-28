@@ -9,7 +9,7 @@ export const TodoContainer: React.FC = () => {
   const todos = useTodos(selector);
 
   return (
-    <Container sx={{ mt: 6, mb: 5, width: "50%" }}>
+    <Container maxWidth="md" sx={{ mt: 6, mb: 5 }}>
       <TodoInput />
       {todos.length ? (
         <TodoList todos={todos} />
