@@ -1,5 +1,6 @@
 import {
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -14,12 +15,18 @@ export const TodoPrioritySelect: React.FC = () => {
   const priority = useAppSelector((state) => state.todos.priority);
 
   const handleChangePriority = (event: SelectChangeEvent) => {
-    dispatch(setPriority(event.target.value));
+    dispatch(setPriority(event?.target.value));
   };
 
   return (
-    <FormControl sx={{ minWidth: 120, ml: 1 }}>
-      <Select value={priority} onChange={handleChangePriority}>
+    <FormControl fullWidth>
+      <InputLabel id="select-label">Priority</InputLabel>
+      <Select
+        labelId="select-label"
+        label="Priority"
+        value={priority}
+        onChange={handleChangePriority}
+      >
         <MenuItem value={TODO_PRIORITY.NONE}>{TODO_PRIORITY.NONE}</MenuItem>
         <MenuItem value={TODO_PRIORITY.HIGH}>{TODO_PRIORITY.HIGH}</MenuItem>
         <MenuItem value={TODO_PRIORITY.MEDIUM}>{TODO_PRIORITY.MEDIUM}</MenuItem>

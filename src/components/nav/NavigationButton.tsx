@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { SxType } from "../../types";
 
 interface Props {
   label: string;
-  sx?: { [key: string]: string | number };
+  sx?: SxType;
   handleClickButton: () => void;
 }
 

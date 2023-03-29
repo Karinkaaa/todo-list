@@ -2,9 +2,13 @@ import { Chip } from "@mui/material";
 import React from "react";
 import { TODO_PRIORITY } from "../../../enums";
 
-export const LowPriorityChip: React.FC = () => (
+interface Props {
+  isDisabled: boolean;
+}
+
+export const LowPriorityChip: React.FC<Props> = ({ isDisabled }) => (
   <Chip
     label={TODO_PRIORITY.LOW}
-    sx={{ background: "yellow", cursor: "pointer" }}
+    sx={{ background: "yellow", cursor: isDisabled ? "default" : "pointer" }}
   />
 );

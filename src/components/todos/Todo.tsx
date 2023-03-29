@@ -5,17 +5,14 @@ import {
   IconButton,
   ListItem,
   ListItemText,
+  SelectChangeEvent,
   TextField,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import { TODO_PRIORITY } from "../../enums";
 import { useAppDispatch } from "../../redux/hooks";
 import { editTodo, removeTodo } from "../../redux/todoSlice";
 import { ITodo } from "../../types";
-import { HighPriorityChip } from "../priority/chips/HighPriorityChip";
-import { LowPriorityChip } from "../priority/chips/LowPriorityChip";
-import { MediumPriorityChip } from "../priority/chips/MediumPriorityChip";
-import { NonePriorityChip } from "../priority/chips/NonePriorityChip";
+import { TodoPriorityChips } from "../priority/TodoPriorityChips";
 
 interface Props {
   todo: ITodo;
@@ -37,11 +34,17 @@ export const Todo: React.FC<Props> = ({ todo }) => {
     dispatch(removeTodo(id));
   };
 
-  const handleEditTodo = () => {
+  const handleEditTodo = (event?: SelectChangeEvent) => {
     const trimmedValue = value?.trim();
 
     if (trimmedValue) {
-      dispatch(editTodo({ id, name: trimmedValue }));
+      dispatch(
+        editTodo({
+          id,
+          name: trimmedValue,
+          priority: event?.target?.value || priority,
+        })
+      );
       setIsReadonly(true);
     }
   };
@@ -59,20 +62,6 @@ export const Todo: React.FC<Props> = ({ todo }) => {
   const handleToggleCheckbox = () => {
     dispatch(editTodo({ id, completed: !completed }));
   };
-
-  const getPriorityChip = () => {
-    if (priority === TODO_PRIORITY.HIGH) {
-      return <HighPriorityChip />;
-    } else if (priority === TODO_PRIORITY.MEDIUM) {
-      return <MediumPriorityChip />;
-    } else if (priority === TODO_PRIORITY.LOW) {
-      return <LowPriorityChip />;
-    } else {
-      return <NonePriorityChip />;
-    }
-  };
-
-  const priorityChip = getPriorityChip();
 
   return (
     <ListItem
@@ -122,7 +111,13 @@ export const Todo: React.FC<Props> = ({ todo }) => {
           onKeyDown={(e) => e.key === "Enter" && handleEditTodo()}
         />
       </ListItemText>
-      <Box sx={{ ml: 2 }}>{priorityChip}</Box>
+      <Box sx={{ ml: 2 }}>
+        <TodoPriorityChips
+          priority={priority}
+          isDisabled={completed}
+          onSelect={handleEditTodo}
+        />
+      </Box>
       <IconButton
         sx={{ ml: 1 }}
         disabled={completed}

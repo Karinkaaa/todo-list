@@ -1,5 +1,9 @@
 import { TODO_PRIORITY, TODO_TYPE } from "./enums";
 
+export type SxType = {
+  [key: string]: string | number;
+};
+
 export type SelectorType = `${TODO_TYPE}`;
 export type PriorityType = `${TODO_PRIORITY}`;
 

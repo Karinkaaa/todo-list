@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import { TODO_PRIORITY } from "../../enums";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addTodo, setPriority } from "../../redux/todoSlice";
-import { TodoPrioritySelect } from "../priority/TodoPrioritySelect";
+import { TodoPrioritySelect } from "./TodoPrioritySelect";
 
 export const TodoInput: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState("");
-  const [isTouched, setIsTouched] = useState(false);
+  const [value, setValue] = useState<string>("");
+  const [isTouched, setIsTouched] = useState<boolean>(false);
   const priority = useAppSelector((state) => state.todos.priority);
 
   const handleAddTodo = (name: string) => {
@@ -36,7 +36,9 @@ export const TodoInput: React.FC = () => {
         onChange={(e) => setValue(e.target.value)}
         onKeyPress={(e) => e.key === "Enter" && handleAddTodo(value)}
       />
-      <TodoPrioritySelect />
+      <Box sx={{ minWidth: 120, ml: 1 }}>
+        <TodoPrioritySelect />
+      </Box>
       <Button
         variant="contained"
         endIcon={<Add />}
