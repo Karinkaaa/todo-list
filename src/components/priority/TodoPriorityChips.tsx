@@ -10,7 +10,6 @@ import { PriorityType } from "../../types";
 import { HighPriorityChip } from "./chips/HighPriorityChip";
 import { LowPriorityChip } from "./chips/LowPriorityChip";
 import { MediumPriorityChip } from "./chips/MediumPriorityChip";
-import { NonePriorityChip } from "./chips/NonePriorityChip";
 
 interface Props {
   priority: PriorityType;
@@ -35,9 +34,6 @@ export const TodoPriorityChips: React.FC<Props> = ({
         }}
         onChange={onSelect}
       >
-        <MenuItem value={TODO_PRIORITY.NONE}>
-          <NonePriorityChip isDisabled={isDisabled} />
-        </MenuItem>
         <MenuItem value={TODO_PRIORITY.HIGH}>
           <HighPriorityChip isDisabled={isDisabled} />
         </MenuItem>

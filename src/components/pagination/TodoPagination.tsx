@@ -1,7 +1,7 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import React from "react";
-import { usePaginationActions } from "../../redux/hooks";
+import { usePagination } from "../../redux/hooks";
 
 interface Props {
   page: number;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const TodoPagination: React.FC<Props> = ({ page, limit, count }) => {
-  const { changePage, changeRowsPerPage } = usePaginationActions();
+  const { changePage, changeRowsPerPage } = usePagination();
   const theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down(400));
 

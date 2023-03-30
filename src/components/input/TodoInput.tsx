@@ -1,24 +1,31 @@
 import { Add } from "@mui/icons-material";
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { TODO_PRIORITY } from "../../enums";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { addTodo, setPriority } from "../../redux/todoSlice";
-import { TodoPrioritySelect } from "./TodoPrioritySelect";
+import { useAppDispatch } from "../../redux/hooks";
+import { addTodo } from "../../redux/todoSlice";
+import { PriorityType } from "../../types";
+import { TodoPrioritySelect } from "../priority/TodoPrioritySelect";
 
 export const TodoInput: React.FC = () => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState<string>("");
+  const [priority, setPriority] = useState<PriorityType | null>(null);
   const [isTouched, setIsTouched] = useState<boolean>(false);
-  const priority = useAppSelector((state) => state.todos.priority);
+  const [isTouchedSelect, setIsTouchedSelect] = useState<boolean>(false);
 
   const handleAddTodo = (name: string) => {
-    if (name?.trim()) {
+    if (name?.trim() && priority) {
       dispatch(addTodo({ name, priority }));
-      dispatch(setPriority(TODO_PRIORITY.NONE));
       setValue("");
+      setPriority(null);
       setIsTouched(false);
-    } else {
+      setIsTouchedSelect(false);
+    } else if (!name?.trim() && !priority) {
+      setIsTouched(true);
+      setIsTouchedSelect(true);
+    } else if (!priority) {
+      setIsTouchedSelect(true);
+    } else if (!name?.trim()) {
       setIsTouched(true);
     }
   };
@@ -26,18 +33,21 @@ export const TodoInput: React.FC = () => {
   return (
     <Box sx={{ display: "flex", mb: 5 }}>
       <TextField
-        label="Enter the thing you need to do:"
+        label="Todo name"
         fullWidth
         value={value}
         error={isTouched && value?.trim() === ""}
-        helperText={
-          value?.trim() === "" && isTouched ? "Please, enter the todo name" : ""
-        }
+        required
         onChange={(e) => setValue(e.target.value)}
         onKeyPress={(e) => e.key === "Enter" && handleAddTodo(value)}
       />
       <Box sx={{ minWidth: 120, ml: 1 }}>
-        <TodoPrioritySelect />
+        <TodoPrioritySelect
+          priority={priority}
+          isTouchedSelect={isTouchedSelect}
+          setPriority={setPriority}
+          setIsTouchedSelect={setIsTouchedSelect}
+        />
       </Box>
       <Button
         variant="contained"

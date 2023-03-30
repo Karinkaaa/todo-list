@@ -1,17 +1,18 @@
-import { TODO_PRIORITY, TODO_TYPE } from "./enums";
+import { TODO_PRIORITY, TODO_STATUS } from "./enums";
 
 export type SxType = {
   [key: string]: string | number;
 };
 
-export type SelectorType = `${TODO_TYPE}`;
+export type StatusType = `${TODO_STATUS}`;
 export type PriorityType = `${TODO_PRIORITY}`;
+export type SelectorType = StatusType | PriorityType;
 
 export interface ITodo {
   id: string;
   name: string;
   createdAt: string;
-  completed: boolean;
+  status: StatusType;
   priority: PriorityType;
 }
 
@@ -19,6 +20,5 @@ export interface ITodos {
   items: ITodo[];
   page: number;
   limit: number;
-  selector: SelectorType;
-  priority: PriorityType;
+  selector?: SelectorType;
 }

@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { TODO_STATUS } from "../../enums";
 import { useAppDispatch } from "../../redux/hooks";
 import { editTodo, removeTodo } from "../../redux/todoSlice";
 import { ITodo } from "../../types";
@@ -22,9 +23,10 @@ export const Todo: React.FC<Props> = ({ todo }) => {
   const ref = useRef<any>(null);
   const dispatch = useAppDispatch();
 
-  const { id, name, createdAt, completed, priority } = todo;
+  const { id, name, createdAt, status, priority } = todo;
   const [value, setValue] = useState<string>(name);
   const [isReadonly, setIsReadonly] = useState<boolean>(true);
+  const isCompleted = status === TODO_STATUS.COMPLETED;
 
   useEffect(() => {
     setValue(name);
@@ -60,14 +62,19 @@ export const Todo: React.FC<Props> = ({ todo }) => {
   };
 
   const handleToggleCheckbox = () => {
-    dispatch(editTodo({ id, completed: !completed }));
+    dispatch(
+      editTodo({
+        id,
+        status: isCompleted ? TODO_STATUS.ACTIVE : TODO_STATUS.COMPLETED,
+      })
+    );
   };
 
   return (
     <ListItem
       key={id}
       sx={{
-        bgcolor: completed ? "primary.light" : "secondary.light",
+        bgcolor: isCompleted ? "primary.light" : "secondary.light",
         borderRadius: 3,
         marginBottom: 1,
         boxShadow: 1,
@@ -78,9 +85,9 @@ export const Todo: React.FC<Props> = ({ todo }) => {
     >
       <IconButton onClick={handleToggleCheckbox}>
         <Checkbox
-          checked={completed}
+          checked={isCompleted}
           checkedIcon={<DoneAll />}
-          sx={{ color: completed ? "primary.dark" : "secondary.main" }}
+          sx={{ color: isCompleted ? "primary.dark" : "secondary.main" }}
         />
       </IconButton>
       <ListItemText>
@@ -90,7 +97,7 @@ export const Todo: React.FC<Props> = ({ todo }) => {
             ref,
             disableUnderline: isReadonly,
             sx: {
-              textDecoration: completed ? "line-through" : "none",
+              textDecoration: isCompleted ? "line-through" : "none",
               cursor: isReadonly ? "default" : "inherit",
             },
           }}
@@ -114,17 +121,17 @@ export const Todo: React.FC<Props> = ({ todo }) => {
       <Box sx={{ ml: 2 }}>
         <TodoPriorityChips
           priority={priority}
-          isDisabled={completed}
+          isDisabled={isCompleted}
           onSelect={handleEditTodo}
         />
       </Box>
       <IconButton
         sx={{ ml: 1 }}
-        disabled={completed}
+        disabled={isCompleted}
         onClick={handleToggleEditButton}
       >
         {isReadonly ? (
-          <Edit sx={{ color: completed ? "gray[500]" : "secondary.main" }} />
+          <Edit sx={{ color: isCompleted ? "gray[500]" : "secondary.main" }} />
         ) : (
           <Check color="secondary" />
         )}

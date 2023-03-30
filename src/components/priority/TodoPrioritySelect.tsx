@@ -7,27 +7,36 @@ import {
 } from "@mui/material";
 import React from "react";
 import { TODO_PRIORITY } from "../../enums";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setPriority } from "../../redux/todoSlice";
+import { PriorityType } from "../../types";
 
-export const TodoPrioritySelect: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const priority = useAppSelector((state) => state.todos.priority);
+interface Props {
+  priority: PriorityType | null;
+  isTouchedSelect: boolean;
+  setPriority: (priority: PriorityType) => void;
+  setIsTouchedSelect: (value: boolean) => void;
+}
 
+export const TodoPrioritySelect: React.FC<Props> = ({
+  priority,
+  setPriority,
+  isTouchedSelect,
+  setIsTouchedSelect,
+}) => {
   const handleChangePriority = (event: SelectChangeEvent) => {
-    dispatch(setPriority(event?.target.value));
+    setPriority(event?.target.value as PriorityType);
+    setIsTouchedSelect(false);
   };
 
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth error={isTouchedSelect}>
       <InputLabel id="select-label">Priority</InputLabel>
       <Select
         labelId="select-label"
         label="Priority"
-        value={priority}
+        required
+        value={priority || ""}
         onChange={handleChangePriority}
       >
-        <MenuItem value={TODO_PRIORITY.NONE}>{TODO_PRIORITY.NONE}</MenuItem>
         <MenuItem value={TODO_PRIORITY.HIGH}>{TODO_PRIORITY.HIGH}</MenuItem>
         <MenuItem value={TODO_PRIORITY.MEDIUM}>{TODO_PRIORITY.MEDIUM}</MenuItem>
         <MenuItem value={TODO_PRIORITY.LOW}>{TODO_PRIORITY.LOW}</MenuItem>
