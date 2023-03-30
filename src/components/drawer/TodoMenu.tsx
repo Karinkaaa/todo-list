@@ -27,7 +27,7 @@ export const TodoMenu: React.FC<Props> = ({ open }) => {
 
   return (
     <List>
-      <ListSubheader sx={{ backgroundColor: "primary.light" }}>
+      <ListSubheader sx={{ bgcolor: "primary.light" }}>
         All
       </ListSubheader>
       <TodoMenuItem

@@ -26,7 +26,11 @@ export const TodoMenuItem: React.FC<Props> = ({
     <ListItem
       key={uuid()}
       disablePadding
-      sx={{ display: "block" }}
+      sx={{
+        display: "block",
+        color: isSelected ? "primary.dark" : "black",
+        boxShadow: isSelected ? 1 : 0,
+      }}
       onClick={onClick}
     >
       <ListItemButton
@@ -42,6 +46,7 @@ export const TodoMenuItem: React.FC<Props> = ({
             minWidth: 0,
             mr: open ? 3 : "auto",
             justifyContent: "center",
+            color: isSelected ? "primary.dark" : "black",
           }}
         >
           {icon}

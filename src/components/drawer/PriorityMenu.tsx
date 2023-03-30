@@ -24,7 +24,7 @@ export const PriorityMenu: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <ListSubheader sx={{ backgroundColor: "primary.light" }}>
+      <ListSubheader sx={{ bgcolor: "primary.light" }}>
         Priority
       </ListSubheader>
       <TodoMenuItem

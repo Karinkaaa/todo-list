@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Box, Drawer, IconButton, useTheme } from "@mui/material";
+import { TodoHeader } from "../toolbar/TodoHeader";
 import { closedMixin, openedMixin } from "./mixins";
 import { TodoMenu } from "./TodoMenu";
 
@@ -36,12 +37,14 @@ export const TodoDrawer: React.FC<Props> = ({ open, onClose }) => {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
-          padding: theme.spacing(0, 1),
+          justifyContent: "space-between",
+          bgcolor: "primary.dark",
+          p: theme.spacing(0, 1),
           ...theme.mixins.toolbar,
         }}
       >
-        <IconButton onClick={onClose}>
+        {open && <TodoHeader />}
+        <IconButton onClick={onClose} sx={{ color: "white" }}>
           {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
         </IconButton>
       </Box>

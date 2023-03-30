@@ -22,7 +22,7 @@ export const StatusMenu: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <ListSubheader sx={{ backgroundColor: "primary.light" }}>
+      <ListSubheader sx={{ bgcolor: "primary.light" }}>
         Status
       </ListSubheader>
       <TodoMenuItem
