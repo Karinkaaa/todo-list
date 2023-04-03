@@ -3,8 +3,17 @@ import { v4 as uuid } from "uuid";
 import { TODO_STATUS } from "../enums";
 import { ITodos } from "../types";
 
+const getTodos = () => {
+  try {
+    const todos = JSON.parse(localStorage.getItem("todos") || "[]");
+    return todos;
+  } catch (e) {
+    return [];
+  }
+};
+
 const initialState: ITodos = {
-  items: JSON.parse(localStorage.getItem("todos") || "[]"),
+  items: getTodos(),
   page: 0,
   limit: 5,
 };
