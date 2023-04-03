@@ -6,38 +6,36 @@ import { SelectorType } from "../../types";
 import { TodoMenuItem } from "./TodoMenuItem";
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
   active: number;
   completed: number;
   selector?: SelectorType;
-  handleSelect: (value: SelectorType) => void;
+  onClick: (value: SelectorType) => void;
 }
 
 export const StatusMenu: React.FC<Props> = ({
-  open,
+  isOpen,
   active,
   completed,
   selector,
-  handleSelect,
+  onClick,
 }) => {
   return (
     <>
-      <ListSubheader sx={{ bgcolor: "primary.light" }}>
-        Status
-      </ListSubheader>
+      <ListSubheader sx={{ bgcolor: "primary.light" }}>Status</ListSubheader>
       <TodoMenuItem
-        open={open}
+        isOpen={isOpen}
         text={`${TODO_STATUS.ACTIVE} (${active})`}
         icon={<CheckBoxOutlineBlank />}
         isSelected={selector === TODO_STATUS.ACTIVE}
-        onClick={() => handleSelect(TODO_STATUS.ACTIVE)}
+        onClick={() => onClick(TODO_STATUS.ACTIVE)}
       />
       <TodoMenuItem
-        open={open}
+        isOpen={isOpen}
         text={`${TODO_STATUS.COMPLETED} (${completed})`}
         icon={<DoneAll />}
         isSelected={selector === TODO_STATUS.COMPLETED}
-        onClick={() => handleSelect(TODO_STATUS.COMPLETED)}
+        onClick={() => onClick(TODO_STATUS.COMPLETED)}
       />
     </>
   );

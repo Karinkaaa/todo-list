@@ -5,21 +5,21 @@ import { TodoContainer } from "../todos/TodoContainer";
 import { TodoAppBar } from "../toolbar/TodoAppBar";
 
 export const App: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpen = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <TodoAppBar open={open} onOpen={handleOpen} />
-      <TodoDrawer open={open} onClose={handleClose} />
+      <TodoAppBar isOpen={isOpen} onOpen={handleOpen} />
+      <TodoDrawer isOpen={isOpen} onClose={handleClose} />
       <TodoContainer />
     </Box>
   );

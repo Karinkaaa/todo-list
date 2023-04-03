@@ -7,27 +7,27 @@ import { TodoMenu } from "./TodoMenu";
 export const drawerWidth = 240;
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
   onClose: () => void;
 }
 
-export const TodoDrawer: React.FC<Props> = ({ open, onClose }) => {
+export const TodoDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
   const theme = useTheme();
 
   return (
     <Drawer
-      open={open}
+      open={isOpen}
       variant="permanent"
       sx={{
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: "nowrap",
         boxSizing: "border-box",
-        ...(open && {
+        ...(isOpen && {
           ...openedMixin(theme, drawerWidth),
           "& .MuiDrawer-paper": openedMixin(theme, drawerWidth),
         }),
-        ...(!open && {
+        ...(!isOpen && {
           ...closedMixin(theme),
           "& .MuiDrawer-paper": closedMixin(theme),
         }),
@@ -43,12 +43,12 @@ export const TodoDrawer: React.FC<Props> = ({ open, onClose }) => {
           ...theme.mixins.toolbar,
         }}
       >
-        {open && <TodoHeader />}
+        {isOpen && <TodoHeader />}
         <IconButton onClick={onClose} sx={{ color: "white" }}>
           {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
         </IconButton>
       </Box>
-      <TodoMenu open={open} />
+      <TodoMenu isOpen={isOpen} />
     </Drawer>
   );
 };

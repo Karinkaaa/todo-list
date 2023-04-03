@@ -12,7 +12,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { TODO_STATUS } from "../../enums";
 import { useAppDispatch } from "../../redux/hooks";
 import { editTodo, removeTodo } from "../../redux/todoSlice";
-import { ITodo } from "../../types";
+import { ITodo, PriorityType } from "../../types";
 import { TodoPriorityChips } from "../priority/TodoPriorityChips";
 
 interface Props {
@@ -24,9 +24,11 @@ export const Todo: React.FC<Props> = ({ todo }) => {
   const dispatch = useAppDispatch();
 
   const { id, name, createdAt, status, priority } = todo;
-  const [value, setValue] = useState<string>(name);
-  const [isReadonly, setIsReadonly] = useState<boolean>(true);
   const isCompleted = status === TODO_STATUS.COMPLETED;
+
+  const [value, setValue] = useState<string>(name);
+  const [select, setSelect] = useState<PriorityType>(priority);
+  const [isReadonly, setIsReadonly] = useState<boolean>(true);
 
   useEffect(() => {
     setValue(name);
@@ -120,9 +122,9 @@ export const Todo: React.FC<Props> = ({ todo }) => {
       </ListItemText>
       <Box sx={{ ml: 2 }}>
         <TodoPriorityChips
-          priority={priority}
+          priority={select}
           isDisabled={isCompleted}
-          onSelect={handleEditTodo}
+          onSelect={setSelect}
         />
       </Box>
       <IconButton

@@ -2,13 +2,13 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from "@mui/material";
 import React, { ReactNode } from "react";
 import { v4 as uuid } from "uuid";
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
   text: string;
   icon: ReactNode;
   isSelected: boolean;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const TodoMenuItem: React.FC<Props> = ({
-  open,
+  isOpen,
   text,
   icon,
   isSelected,
@@ -37,21 +37,21 @@ export const TodoMenuItem: React.FC<Props> = ({
         selected={isSelected}
         sx={{
           minHeight: 48,
-          justifyContent: open ? "initial" : "center",
+          justifyContent: isOpen ? "initial" : "center",
           px: 2.5,
         }}
       >
         <ListItemIcon
           sx={{
             minWidth: 0,
-            mr: open ? 3 : "auto",
+            mr: isOpen ? 3 : "auto",
             justifyContent: "center",
             color: isSelected ? "primary.dark" : "black",
           }}
         >
           {icon}
         </ListItemIcon>
-        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+        <ListItemText primary={text} sx={{ opacity: isOpen ? 1 : 0 }} />
       </ListItemButton>
     </ListItem>
   );

@@ -4,11 +4,11 @@ import { drawerWidth } from "../drawer/TodoDrawer";
 import { TodoToolbar } from "./TodoToolbar";
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
   onOpen: () => void;
 }
 
-export const TodoAppBar: React.FC<Props> = ({ open, onOpen }) => {
+export const TodoAppBar: React.FC<Props> = ({ isOpen, onOpen }) => {
   return (
     <AppBar
       position="fixed"
@@ -20,7 +20,7 @@ export const TodoAppBar: React.FC<Props> = ({ open, onOpen }) => {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        ...(open && {
+        ...(isOpen && {
           ml: drawerWidth,
           width: `calc(100% - ${drawerWidth}px)`,
           transition: theme.transitions.create(["width", "margin"], {
@@ -30,7 +30,7 @@ export const TodoAppBar: React.FC<Props> = ({ open, onOpen }) => {
         }),
       })}
     >
-      <TodoToolbar open={open} handleClick={onOpen} />
+      <TodoToolbar isOpen={isOpen} handleClick={onOpen} />
     </AppBar>
   );
 };

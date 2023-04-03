@@ -13,10 +13,10 @@ import { StatusMenu } from "./StatusMenu";
 import { TodoMenuItem } from "./TodoMenuItem";
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
 }
 
-export const TodoMenu: React.FC<Props> = ({ open }) => {
+export const TodoMenu: React.FC<Props> = ({ isOpen }) => {
   const dispatch = useAppDispatch();
   const { all, active, completed, high, medium, low } = useTodosCount();
   const selector = useAppSelector((state) => state.todos.selector);
@@ -27,30 +27,28 @@ export const TodoMenu: React.FC<Props> = ({ open }) => {
 
   return (
     <List>
-      <ListSubheader sx={{ bgcolor: "primary.light" }}>
-        All
-      </ListSubheader>
+      <ListSubheader sx={{ bgcolor: "primary.light" }}>All</ListSubheader>
       <TodoMenuItem
-        open={open}
+        isOpen={isOpen}
         text={`All (${all})`}
         icon={<ListIcon />}
         isSelected={!selector}
-        onClick={() => handleSelect()}
+        onClick={() => handleSelect(void 0)}
       />
       <StatusMenu
-        open={open}
+        isOpen={isOpen}
         active={active}
         completed={completed}
         selector={selector}
-        handleSelect={handleSelect}
+        onClick={handleSelect}
       />
       <PriorityMenu
-        open={open}
+        isOpen={isOpen}
         high={high}
         medium={medium}
         low={low}
         selector={selector}
-        handleSelect={handleSelect}
+        onClick={handleSelect}
       />
     </List>
   );

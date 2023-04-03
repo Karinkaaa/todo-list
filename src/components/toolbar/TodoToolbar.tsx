@@ -4,11 +4,11 @@ import React from "react";
 import { TodoHeader } from "./TodoHeader";
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
   handleClick: () => void;
 }
 
-export const TodoToolbar: React.FC<Props> = ({ open, handleClick }) => {
+export const TodoToolbar: React.FC<Props> = ({ isOpen, handleClick }) => {
   return (
     <Toolbar>
       <IconButton
@@ -16,13 +16,13 @@ export const TodoToolbar: React.FC<Props> = ({ open, handleClick }) => {
         sx={{
           mr: 2,
           color: "white",
-          ...(open && { display: "none" }),
+          ...(isOpen && { display: "none" }),
         }}
         onClick={handleClick}
       >
         <Menu />
       </IconButton>
-      {!open && <TodoHeader />}
+      {!isOpen && <TodoHeader />}
     </Toolbar>
   );
 };

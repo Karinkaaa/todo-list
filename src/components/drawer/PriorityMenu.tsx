@@ -6,47 +6,45 @@ import { SelectorType } from "../../types";
 import { TodoMenuItem } from "./TodoMenuItem";
 
 interface Props {
-  open: boolean;
+  isOpen: boolean;
   high: number;
   medium: number;
   low: number;
   selector?: SelectorType;
-  handleSelect: (value: SelectorType) => void;
+  onClick: (value: SelectorType) => void;
 }
 
 export const PriorityMenu: React.FC<Props> = ({
-  open,
+  isOpen,
   high,
   medium,
   low,
   selector,
-  handleSelect,
+  onClick,
 }) => {
   return (
     <>
-      <ListSubheader sx={{ bgcolor: "primary.light" }}>
-        Priority
-      </ListSubheader>
+      <ListSubheader sx={{ bgcolor: "primary.light" }}>Priority</ListSubheader>
       <TodoMenuItem
-        open={open}
+        isOpen={isOpen}
         text={`${TODO_PRIORITY.HIGH} (${high})`}
         icon={<Star />}
         isSelected={selector === TODO_PRIORITY.HIGH}
-        onClick={() => handleSelect(TODO_PRIORITY.HIGH)}
+        onClick={() => onClick(TODO_PRIORITY.HIGH)}
       />
       <TodoMenuItem
-        open={open}
+        isOpen={isOpen}
         text={`${TODO_PRIORITY.MEDIUM} (${medium})`}
         icon={<StarHalf />}
         isSelected={selector === TODO_PRIORITY.MEDIUM}
-        onClick={() => handleSelect(TODO_PRIORITY.MEDIUM)}
+        onClick={() => onClick(TODO_PRIORITY.MEDIUM)}
       />
       <TodoMenuItem
-        open={open}
+        isOpen={isOpen}
         text={`${TODO_PRIORITY.LOW} (${low})`}
         icon={<StarOutline />}
         isSelected={selector === TODO_PRIORITY.LOW}
-        onClick={() => handleSelect(TODO_PRIORITY.LOW)}
+        onClick={() => onClick(TODO_PRIORITY.LOW)}
       />
     </>
   );
