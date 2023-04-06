@@ -25,23 +25,23 @@ export const PriorityMenu: React.FC<Props> = ({
     <>
       <ListSubheader sx={{ bgcolor: "primary.light" }}>Priority</ListSubheader>
       <TodoMenuItem
-        isOpen={isOpen}
         text={`${TODO_PRIORITY.HIGH} (${high})`}
         icon={<Star />}
+        isOpen={isOpen}
         isSelected={selector === TODO_PRIORITY.HIGH}
         onClick={() => onClick(TODO_PRIORITY.HIGH)}
       />
       <TodoMenuItem
-        isOpen={isOpen}
         text={`${TODO_PRIORITY.MEDIUM} (${medium})`}
         icon={<StarHalf />}
+        isOpen={isOpen}
         isSelected={selector === TODO_PRIORITY.MEDIUM}
         onClick={() => onClick(TODO_PRIORITY.MEDIUM)}
       />
       <TodoMenuItem
-        isOpen={isOpen}
         text={`${TODO_PRIORITY.LOW} (${low})`}
         icon={<StarOutline />}
+        isOpen={isOpen}
         isSelected={selector === TODO_PRIORITY.LOW}
         onClick={() => onClick(TODO_PRIORITY.LOW)}
       />

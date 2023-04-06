@@ -45,7 +45,7 @@ export const Todo: React.FC<Props> = ({ todo }) => {
         <Checkbox
           checked={isCompleted}
           checkedIcon={<DoneAll />}
-          sx={{ color: isCompleted ? "primary.dark" : "secondary.main" }}
+          sx={{ color: isCompleted ? "primary.main" : "secondary.main" }}
         />
       </IconButton>
       <EditTodoForm todo={todo} />

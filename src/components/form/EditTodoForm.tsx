@@ -1,5 +1,5 @@
 import { ClickAwayListener } from "@mui/base";
-import { Check, Edit } from "@mui/icons-material";
+import { Done, Edit } from "@mui/icons-material";
 import { Box, Chip, IconButton, ListItemText, MenuItem } from "@mui/material";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -128,7 +128,6 @@ export const EditTodoForm: React.FC<Props> = ({ todo }) => {
           </SelectController>
         </Box>
         <IconButton
-          // sx={{ ml: 1 }}
           disabled={isCompleted}
           onClick={isReadonly ? handleToggleEditButton : handleSubmit(onSubmit)}
         >
@@ -137,7 +136,7 @@ export const EditTodoForm: React.FC<Props> = ({ todo }) => {
               sx={{ color: isCompleted ? "gray[500]" : "secondary.main" }}
             />
           ) : (
-            <Check color="secondary" />
+            <Done color="secondary" />
           )}
         </IconButton>
       </form>

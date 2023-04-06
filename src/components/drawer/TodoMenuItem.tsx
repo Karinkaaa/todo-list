@@ -1,58 +1,69 @@
 import {
+  Fade,
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Tooltip,
 } from "@mui/material";
 import React, { ReactNode } from "react";
 import { v4 as uuid } from "uuid";
 
 interface Props {
-  isOpen: boolean;
   text: string;
   icon: ReactNode;
+  isOpen: boolean;
   isSelected: boolean;
   onClick: () => void;
 }
 
 export const TodoMenuItem: React.FC<Props> = ({
-  isOpen,
   text,
   icon,
+  isOpen,
   isSelected,
   onClick,
 }) => {
   return (
-    <ListItem
-      key={uuid()}
-      disablePadding
-      sx={{
-        display: "block",
-        color: isSelected ? "primary.dark" : "black",
-        boxShadow: isSelected ? 1 : 0,
-      }}
-      onClick={onClick}
+    <Tooltip
+      arrow
+      title={text}
+      placement="right"
+      disableHoverListener={isOpen}
+      TransitionComponent={Fade}
+      TransitionProps={{ timeout: 500 }}
     >
-      <ListItemButton
-        selected={isSelected}
+      <ListItem
+        key={uuid()}
+        disablePadding
         sx={{
-          minHeight: 48,
-          justifyContent: isOpen ? "initial" : "center",
-          px: 2.5,
+          display: "block",
+          color: isSelected ? "primary.dark" : "black",
+          boxShadow: isSelected ? 1 : 0,
         }}
+        onClick={onClick}
       >
-        <ListItemIcon
+        <ListItemButton
+          selected={isSelected}
           sx={{
-            minWidth: 0,
-            mr: isOpen ? 3 : "auto",
-            justifyContent: "center",
-            color: isSelected ? "primary.dark" : "black",
+            minHeight: 48,
+            justifyContent: isOpen ? "initial" : "center",
+            px: 2.5,
           }}
         >
-          {icon}
-        </ListItemIcon>
-        <ListItemText primary={text} sx={{ opacity: isOpen ? 1 : 0 }} />
-      </ListItemButton>
-    </ListItem>
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: isOpen ? 3 : "auto",
+              justifyContent: "center",
+              color: isSelected ? "primary.dark" : "black",
+            }}
+          >
+            {icon}
+          </ListItemIcon>
+          <ListItemText primary={text} sx={{ opacity: isOpen ? 1 : 0 }} />
+        </ListItemButton>
+      </ListItem>
+    </Tooltip>
   );
 };

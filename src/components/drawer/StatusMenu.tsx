@@ -23,16 +23,16 @@ export const StatusMenu: React.FC<Props> = ({
     <>
       <ListSubheader sx={{ bgcolor: "primary.light" }}>Status</ListSubheader>
       <TodoMenuItem
-        isOpen={isOpen}
         text={`${TODO_STATUS.ACTIVE} (${active})`}
         icon={<CheckBoxOutlineBlank />}
+        isOpen={isOpen}
         isSelected={selector === TODO_STATUS.ACTIVE}
         onClick={() => onClick(TODO_STATUS.ACTIVE)}
       />
       <TodoMenuItem
-        isOpen={isOpen}
         text={`${TODO_STATUS.COMPLETED} (${completed})`}
         icon={<DoneAll />}
+        isOpen={isOpen}
         isSelected={selector === TODO_STATUS.COMPLETED}
         onClick={() => onClick(TODO_STATUS.COMPLETED)}
       />

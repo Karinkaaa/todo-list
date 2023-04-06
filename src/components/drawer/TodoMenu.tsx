@@ -29,9 +29,9 @@ export const TodoMenu: React.FC<Props> = ({ isOpen }) => {
     <List>
       <ListSubheader sx={{ bgcolor: "primary.light" }}>All</ListSubheader>
       <TodoMenuItem
-        isOpen={isOpen}
         text={`All (${all})`}
         icon={<ListIcon />}
+        isOpen={isOpen}
         isSelected={!selector}
         onClick={() => handleSelect(void 0)}
       />
