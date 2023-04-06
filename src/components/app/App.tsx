@@ -24,5 +24,3 @@ export const App: React.FC = () => {
     </Box>
   );
 };
-
-export default App;

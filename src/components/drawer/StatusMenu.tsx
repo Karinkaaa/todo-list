@@ -1,8 +1,7 @@
 import { CheckBoxOutlineBlank, DoneAll } from "@mui/icons-material";
 import { ListSubheader } from "@mui/material";
 import React from "react";
-import { TODO_STATUS } from "../../enums";
-import { SelectorType } from "../../types";
+import { SelectorType, TODO_STATUS } from "../../types";
 import { TodoMenuItem } from "./TodoMenuItem";
 
 interface Props {

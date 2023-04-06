@@ -1,7 +1,7 @@
 import { Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { useAppSelector, useTodos } from "../../redux/hooks";
-import { TodoInput } from "../input/TodoInput";
+import { AddTodoForm } from "../form/AddTodoForm";
 import { TodoList } from "./TodoList";
 
 export const TodoContainer: React.FC = () => {
@@ -11,7 +11,7 @@ export const TodoContainer: React.FC = () => {
   return (
     <Container maxWidth="md" sx={{ mt: 6, mb: 5 }}>
       <Toolbar />
-      <TodoInput />
+      <AddTodoForm />
       {todos.length ? (
         <TodoList todos={todos} />
       ) : (

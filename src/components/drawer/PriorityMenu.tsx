@@ -1,8 +1,7 @@
 import { Star, StarHalf, StarOutline } from "@mui/icons-material";
 import { ListSubheader } from "@mui/material";
 import React from "react";
-import { TODO_PRIORITY } from "../../enums";
-import { SelectorType } from "../../types";
+import { SelectorType, TODO_PRIORITY } from "../../types";
 import { TodoMenuItem } from "./TodoMenuItem";
 
 interface Props {

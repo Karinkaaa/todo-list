@@ -1,9 +1,5 @@
 import { TODO_PRIORITY, TODO_STATUS } from "./enums";
 
-export type SxType = {
-  [key: string]: string | number;
-};
-
 export type StatusType = `${TODO_STATUS}`;
 export type PriorityType = `${TODO_PRIORITY}`;
 export type SelectorType = StatusType | PriorityType;
@@ -22,3 +18,4 @@ export interface ITodos {
   limit: number;
   selector?: SelectorType;
 }
+

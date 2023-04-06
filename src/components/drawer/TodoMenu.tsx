@@ -6,7 +6,7 @@ import {
   useAppSelector,
   useTodosCount,
 } from "../../redux/hooks";
-import { setSelector } from "../../redux/todoSlice";
+import { setSelector } from "../../redux/slice";
 import { PriorityType, StatusType } from "../../types";
 import { PriorityMenu } from "./PriorityMenu";
 import { StatusMenu } from "./StatusMenu";

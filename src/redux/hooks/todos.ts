@@ -1,12 +1,10 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { TODO_STATUS } from "../enums";
-import { TODO_PRIORITY } from "./../enums";
-import { PriorityType, StatusType } from "./../types";
-import { AppDispatch, RootState } from "./store";
-import { setLimit, setPage } from "./todoSlice";
-
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useAppSelector } from ".";
+import {
+  PriorityType,
+  StatusType,
+  TODO_PRIORITY,
+  TODO_STATUS,
+} from "../../types";
 
 export const useTodos = (selector?: StatusType | PriorityType) => {
   const allTodos = useAppSelector((state) => state.todos.items);
@@ -55,26 +53,4 @@ export const useTodosCount = () => {
       low: 0,
     }
   );
-};
-
-export const usePagination = () => {
-  const dispatch = useAppDispatch();
-
-  const changePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    dispatch(setPage(newPage));
-  };
-
-  const changeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    dispatch(setLimit(event.target.value));
-  };
-
-  return {
-    changePage,
-    changeRowsPerPage,
-  };
 };
