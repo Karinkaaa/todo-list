@@ -29,6 +29,7 @@ export const todoSlice = createSlice({
         createdAt: new Date().toJSON(),
         status: TODO_STATUS.ACTIVE,
         priority,
+        isEdited: false,
       });
       localStorage.setItem("todos", JSON.stringify(state.items));
     },

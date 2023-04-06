@@ -15,15 +15,22 @@ interface Props {
 
 export const EditTodoForm: React.FC<Props> = ({ todo }) => {
   const dispatch = useAppDispatch();
-  const isCompleted = todo.status === TODO_STATUS.COMPLETED;
-  const [isReadonly, setIsReadonly] = useState<boolean>(true);
   const rules = useTodoNameRules(todo.id);
+  const [isReadonly, setIsReadonly] = useState<boolean>(true);
+
+  const isCompleted = todo.status === TODO_STATUS.COMPLETED;
+  const helperText = (
+    <span>
+      {new Date(todo.createdAt).toLocaleDateString("ua")}{" "}
+      <em>{todo.isEdited ? "(edited)" : ""}</em>
+    </span>
+  );
 
   const {
     handleSubmit,
     control,
     setFocus,
-    formState: { isValid },
+    formState: { isValid, isDirty },
     reset,
   } = useForm<ITodoForm>({
     mode: "onChange",
@@ -41,6 +48,7 @@ export const EditTodoForm: React.FC<Props> = ({ todo }) => {
           id: todo.id,
           name: data.name,
           priority: data.priority,
+          isEdited: isDirty,
         })
       );
     } else {
@@ -77,7 +85,7 @@ export const EditTodoForm: React.FC<Props> = ({ todo }) => {
             InputProps={{
               disableUnderline: isReadonly,
             }}
-            helperText={new Date(todo.createdAt).toLocaleDateString("ua")}
+            helperText={helperText}
             onKeyDown={(e) => e.key === "Enter" && setFocus("priority")}
             rules={rules}
             control={control}

@@ -10,6 +10,7 @@ export interface ITodo {
   createdAt: string;
   status: StatusType;
   priority: PriorityType;
+  isEdited: boolean;
 }
 
 export interface ITodos {
