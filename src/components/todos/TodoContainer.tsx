@@ -5,8 +5,8 @@ import { AddTodoForm } from "../form/AddTodoForm";
 import { TodoList } from "./TodoList";
 
 export const TodoContainer: React.FC = () => {
-  const status = useAppSelector((state) => state.todos.selector);
-  const todos = useTodos(status);
+  const filters = useAppSelector((state) => state.todos.filters);
+  const todos = useTodos(filters);
 
   return (
     <Container maxWidth="md" sx={{ mt: 6, mb: 5 }}>

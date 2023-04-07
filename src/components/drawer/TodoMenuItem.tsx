@@ -26,6 +26,7 @@ export const TodoMenuItem: React.FC<Props> = ({
 }) => {
   return (
     <Tooltip
+      key={uuid()}
       arrow
       title={text}
       placement="right"
@@ -34,7 +35,6 @@ export const TodoMenuItem: React.FC<Props> = ({
       TransitionProps={{ timeout: 500 }}
     >
       <ListItem
-        key={uuid()}
         disablePadding
         sx={{
           display: "block",

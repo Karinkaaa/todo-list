@@ -27,7 +27,6 @@ export const InputController: React.FC<
     <TextField
       fullWidth
       multiline
-      autoFocus
       {...field}
       {...props}
       inputRef={ref}

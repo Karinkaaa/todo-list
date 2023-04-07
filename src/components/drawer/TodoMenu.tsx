@@ -6,8 +6,8 @@ import {
   useAppSelector,
   useTodosCount,
 } from "../../redux/hooks";
-import { setSelector } from "../../redux/slice";
-import { PriorityType, StatusType } from "../../types";
+import { setFilters } from "../../redux/slice";
+import { IFilters } from "../../types";
 import { PriorityMenu } from "./PriorityMenu";
 import { StatusMenu } from "./StatusMenu";
 import { TodoMenuItem } from "./TodoMenuItem";
@@ -19,10 +19,10 @@ interface Props {
 export const TodoMenu: React.FC<Props> = ({ isOpen }) => {
   const dispatch = useAppDispatch();
   const { all, active, completed, high, medium, low } = useTodosCount();
-  const selector = useAppSelector((state) => state.todos.selector);
+  const filters = useAppSelector((state) => state.todos.filters);
 
-  const handleSelect = (value?: StatusType | PriorityType) => {
-    dispatch(setSelector(value));
+  const handleSelect = (value?: IFilters) => {
+    dispatch(setFilters(value ? { ...filters, ...value } : {}));
   };
 
   return (
@@ -32,14 +32,14 @@ export const TodoMenu: React.FC<Props> = ({ isOpen }) => {
         text={`All (${all})`}
         icon={<ListIcon />}
         isOpen={isOpen}
-        isSelected={!selector}
-        onClick={() => handleSelect(void 0)}
+        isSelected={!filters}
+        onClick={() => handleSelect()}
       />
       <StatusMenu
         isOpen={isOpen}
         active={active}
         completed={completed}
-        selector={selector}
+        filter={filters?.status}
         onClick={handleSelect}
       />
       <PriorityMenu
@@ -47,7 +47,7 @@ export const TodoMenu: React.FC<Props> = ({ isOpen }) => {
         high={high}
         medium={medium}
         low={low}
-        selector={selector}
+        filter={filters?.priority}
         onClick={handleSelect}
       />
     </List>

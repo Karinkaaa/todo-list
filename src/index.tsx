@@ -1,24 +1,10 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { App } from "./components/app/App";
 import "./index.css";
 import { store } from "./redux/store";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#6366f1",
-      dark: "#6311df",
-      light: "#bfd5ffb5",
-    },
-    secondary: {
-      main: "#11b981",
-      dark: "#056042",
-      light: "#ddf3f0d6",
-    },
-  },
-});
+import { theme } from "./theme";
 
 render(
   <Provider store={store}>

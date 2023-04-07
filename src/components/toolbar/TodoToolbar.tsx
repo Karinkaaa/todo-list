@@ -1,6 +1,7 @@
 import { Menu } from "@mui/icons-material";
 import { IconButton, Toolbar } from "@mui/material";
 import React from "react";
+import { SearchTodo } from "./SearchTodo";
 import { TodoHeader } from "./TodoHeader";
 
 interface Props {
@@ -23,6 +24,7 @@ export const TodoToolbar: React.FC<Props> = ({ isOpen, handleClick }) => {
         <Menu />
       </IconButton>
       {!isOpen && <TodoHeader />}
+      <SearchTodo />
     </Toolbar>
   );
 };

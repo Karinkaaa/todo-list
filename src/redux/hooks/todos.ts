@@ -1,37 +1,34 @@
 import { useAppSelector } from ".";
 import {
-  PriorityType,
-  StatusType,
+  IFilters,
+  ITodo,
+  ITodosCount,
   TODO_PRIORITY,
   TODO_STATUS,
 } from "../../types";
 
-export const useTodos = (selector?: StatusType | PriorityType) => {
-  const allTodos = useAppSelector((state) => state.todos.items);
+export const useTodos = (filters?: IFilters): ITodo[] => {
+  let todos = useAppSelector((state) => state.todos.items);
 
-  switch (selector) {
-    case TODO_STATUS.ACTIVE: {
-      return allTodos.filter((item) => item.status === TODO_STATUS.ACTIVE);
-    }
-    case TODO_STATUS.COMPLETED: {
-      return allTodos.filter((item) => item.status === TODO_STATUS.COMPLETED);
-    }
-    case TODO_PRIORITY.HIGH: {
-      return allTodos.filter((item) => item.priority === TODO_PRIORITY.HIGH);
-    }
-    case TODO_PRIORITY.MEDIUM: {
-      return allTodos.filter((item) => item.priority === TODO_PRIORITY.MEDIUM);
-    }
-    case TODO_PRIORITY.LOW: {
-      return allTodos.filter((item) => item.priority === TODO_PRIORITY.LOW);
-    }
-    default: {
-      return allTodos;
-    }
+  if (filters) {
+    return todos.filter((todo) => {
+      return Object.keys(filters).every((key) => {
+        const filterValue = filters[key];
+        const todoValue = todo[key as keyof ITodo] as string;
+
+        if (key === "name") {
+          return todoValue.includes(filterValue);
+        }
+
+        return todoValue === filterValue;
+      });
+    });
   }
+
+  return todos;
 };
 
-export const useTodosCount = () => {
+export const useTodosCount = (): ITodosCount => {
   const todos = useTodos();
 
   return todos.reduce(

@@ -1,22 +1,22 @@
 import { CheckBoxOutlineBlank, DoneAll } from "@mui/icons-material";
 import { ListSubheader } from "@mui/material";
 import React from "react";
-import { SelectorType, TODO_STATUS } from "../../types";
+import { IFilters, TODO_STATUS } from "../../types";
 import { TodoMenuItem } from "./TodoMenuItem";
 
 interface Props {
   isOpen: boolean;
   active: number;
   completed: number;
-  selector?: SelectorType;
-  onClick: (value: SelectorType) => void;
+  filter?: keyof IFilters;
+  onClick: (value: IFilters) => void;
 }
 
 export const StatusMenu: React.FC<Props> = ({
   isOpen,
   active,
   completed,
-  selector,
+  filter,
   onClick,
 }) => {
   return (
@@ -26,15 +26,15 @@ export const StatusMenu: React.FC<Props> = ({
         text={`${TODO_STATUS.ACTIVE} (${active})`}
         icon={<CheckBoxOutlineBlank />}
         isOpen={isOpen}
-        isSelected={selector === TODO_STATUS.ACTIVE}
-        onClick={() => onClick(TODO_STATUS.ACTIVE)}
+        isSelected={filter === TODO_STATUS.ACTIVE}
+        onClick={() => onClick({ status: TODO_STATUS.ACTIVE })}
       />
       <TodoMenuItem
         text={`${TODO_STATUS.COMPLETED} (${completed})`}
         icon={<DoneAll />}
         isOpen={isOpen}
-        isSelected={selector === TODO_STATUS.COMPLETED}
-        onClick={() => onClick(TODO_STATUS.COMPLETED)}
+        isSelected={filter === TODO_STATUS.COMPLETED}
+        onClick={() => onClick({ status: TODO_STATUS.COMPLETED })}
       />
     </>
   );

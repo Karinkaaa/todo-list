@@ -2,7 +2,10 @@ import { TODO_PRIORITY, TODO_STATUS } from "./enums";
 
 export type StatusType = `${TODO_STATUS}`;
 export type PriorityType = `${TODO_PRIORITY}`;
-export type SelectorType = StatusType | PriorityType;
+
+export interface IFilters {
+  [key: string]: string;
+}
 
 export interface ITodo {
   id: string;
@@ -17,6 +20,14 @@ export interface ITodos {
   items: ITodo[];
   page: number;
   limit: number;
-  selector?: SelectorType;
+  filters?: IFilters;
 }
 
+export interface ITodosCount {
+  all: number;
+  active: number;
+  completed: number;
+  high: number;
+  medium: number;
+  low: number;
+}

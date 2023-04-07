@@ -1,7 +1,6 @@
 import { Delete, DoneAll } from "@mui/icons-material";
 import { Checkbox, IconButton, ListItem } from "@mui/material";
 import React from "react";
-import { v4 as uuid } from "uuid";
 import { useAppDispatch } from "../../redux/hooks";
 import { editTodo, removeTodo } from "../../redux/slice";
 import { ITodo, TODO_STATUS } from "../../types";
@@ -30,16 +29,15 @@ export const Todo: React.FC<Props> = ({ todo }) => {
 
   return (
     <ListItem
-      key={uuid()}
-      sx={{
+      sx={(theme) => ({
         bgcolor: isCompleted ? "primary.light" : "secondary.light",
-        borderRadius: 3,
-        marginBottom: 1,
+        borderRadius: theme.shape.borderRadius,
+        mb: 1,
         boxShadow: 1,
         "&:hover": {
           boxShadow: 5,
         },
-      }}
+      })}
     >
       <IconButton onClick={handleToggleCheckbox}>
         <Checkbox

@@ -51,13 +51,13 @@ export const todoSlice = createSlice({
       state.limit = action.payload;
       state.page = 0;
     },
-    setSelector: (state, action) => {
-      state.selector = action.payload;
+    setFilters: (state, action) => {
+      state.filters = action.payload;
       state.page = 0;
     },
   },
 });
 
-export const { addTodo, removeTodo, editTodo, setPage, setLimit, setSelector } =
+export const { addTodo, removeTodo, editTodo, setPage, setLimit, setFilters } =
   todoSlice.actions;
 export const todoReducer = todoSlice.reducer;
