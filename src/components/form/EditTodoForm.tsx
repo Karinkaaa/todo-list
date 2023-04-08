@@ -74,7 +74,10 @@ export const EditTodoForm: React.FC<Props> = ({ todo }) => {
       onClickAway={handleClickAway}
       mouseEvent={isReadonly ? false : "onClick"}
     >
-      <form style={{ display: "flex", alignItems: "center", width: "100%" }}>
+      <form
+        style={{ display: "flex", alignItems: "center", width: "100%" }}
+        className={isReadonly ? "" : "active"}
+      >
         <ListItemText>
           <InputController
             id={`ic-${todo.id}`}

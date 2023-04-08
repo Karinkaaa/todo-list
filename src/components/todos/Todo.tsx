@@ -1,5 +1,5 @@
 import { Delete, DoneAll } from "@mui/icons-material";
-import { Checkbox, IconButton, ListItem } from "@mui/material";
+import { alpha, Checkbox, IconButton, ListItem } from "@mui/material";
 import React from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { editTodo, removeTodo } from "../../redux/slice";
@@ -36,6 +36,16 @@ export const Todo: React.FC<Props> = ({ todo }) => {
         boxShadow: 1,
         "&:hover": {
           boxShadow: 5,
+          bgcolor: alpha(
+            isCompleted
+              ? theme.palette.primary.main
+              : theme.palette.secondary.main,
+            0.3
+          ),
+        },
+        "&:has(form):has(.active)": {
+          boxShadow: 5,
+          bgcolor: alpha(theme.palette.secondary.main, 0.5),
         },
       })}
     >

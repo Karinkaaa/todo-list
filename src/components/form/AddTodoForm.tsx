@@ -17,7 +17,7 @@ export const AddTodoForm: React.FC = () => {
     handleSubmit,
     reset,
     control,
-    formState: { isValid },
+    formState: { isValid, isDirty },
     setFocus,
   } = useForm<ITodoForm>({
     mode: "onChange",
@@ -37,7 +37,10 @@ export const AddTodoForm: React.FC = () => {
   };
 
   return (
-    <ClickAwayListener onClickAway={() => reset()}>
+    <ClickAwayListener
+      onClickAway={() => reset()}
+      mouseEvent={isDirty ? "onClick" : false}
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ display: "flex", margin: "0 0 16px" }}
