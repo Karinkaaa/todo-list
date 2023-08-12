@@ -39,7 +39,7 @@ export const AddTodoForm: React.FC = () => {
   return (
     <ClickAwayListener
       onClickAway={() => reset()}
-      mouseEvent={isDirty ? "onClick" : false}
+      mouseEvent={isDirty || !isValid ? "onClick" : false}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
