@@ -15,6 +15,7 @@ const initialState: ITodos = {
   items: getTodos(),
   page: 0,
   limit: 5,
+  filters: {},
 };
 
 export const todoSlice = createSlice({

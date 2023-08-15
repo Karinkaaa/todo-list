@@ -1,6 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, ClickAwayListener, TextField } from "@mui/material";
-import { alpha } from "@mui/material/styles";
 import React, { ChangeEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFilters } from "../../redux/slice";
@@ -8,10 +7,10 @@ import { setFilters } from "../../redux/slice";
 export const SearchTodo: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isTouched, setIsTouched] = useState<boolean>(false);
-  const filterName = useAppSelector((state) => state.todos.filters?.name) || "";
+  const filters = useAppSelector((state) => state.todos.filters);
 
   const handleChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFilters({ name: event.target.value }));
+    dispatch(setFilters({ ...filters, name: event.target.value }));
     setIsTouched(true);
   };
 
@@ -29,10 +28,6 @@ export const SearchTodo: React.FC = () => {
         sx={(theme) => ({
           position: "relative",
           borderRadius: theme.shape.borderRadius,
-          bgcolor: alpha(theme.palette.primary.light, 0.1),
-          "&:hover": {
-            bgcolor: alpha(theme.palette.primary.light, 0.2),
-          },
         })}
       >
         <Box
@@ -45,14 +40,13 @@ export const SearchTodo: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <SearchIcon />
+          <SearchIcon sx={{ color: "gray" }} />
         </Box>
         <TextField
           placeholder="Search…"
-          variant="standard"
-          value={filterName}
+          variant="outlined"
+          value={filters.name || ""}
           onChange={handleChangeSearch}
-          InputProps={{ disableUnderline: true }}
           sx={{
             "& .MuiInputBase-root": { color: "inherit" },
             "& .MuiInputBase-input": {

@@ -6,7 +6,6 @@ export type {
   IFilters,
   ITodo,
   ITodos,
-  ITodosCount,
   PriorityType,
   StatusType,
 } from "./todos";

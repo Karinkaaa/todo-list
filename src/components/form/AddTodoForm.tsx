@@ -74,7 +74,7 @@ export const AddTodoForm: React.FC = () => {
           type="submit"
           variant="contained"
           endIcon={<Add />}
-          sx={{ m: 1, minWidth: 100, height: 56 }}
+          sx={{ my: 1, ml: 1, minWidth: 100, height: 56 }}
         >
           Add
         </Button>

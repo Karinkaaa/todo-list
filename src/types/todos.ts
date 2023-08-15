@@ -20,14 +20,5 @@ export interface ITodos {
   items: ITodo[];
   page: number;
   limit: number;
-  filters?: IFilters;
-}
-
-export interface ITodosCount {
-  all: number;
-  active: number;
-  completed: number;
-  high: number;
-  medium: number;
-  low: number;
+  filters: IFilters;
 }

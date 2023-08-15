@@ -1,6 +1,6 @@
-import { AppBar } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 import React from "react";
-import { TodoToolbar } from "./TodoToolbar";
+import { TodoHeader } from "./TodoHeader";
 
 export const TodoAppBar: React.FC = () => {
   return (
@@ -12,7 +12,9 @@ export const TodoAppBar: React.FC = () => {
         color: "white",
       }}
     >
-      <TodoToolbar />
+      <Toolbar>
+        <TodoHeader />
+      </Toolbar>
     </AppBar>
   );
 };
