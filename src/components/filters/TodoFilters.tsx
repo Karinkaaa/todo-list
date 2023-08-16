@@ -1,48 +1,47 @@
 import { FilterAltOff } from "@mui/icons-material";
-import { Box, IconButton, ToggleButtonGroup } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import React from "react";
-import { useAppDispatch } from "../../redux/hooks";
-import { setFilters } from "../../redux/slice";
+import { useFilters } from "../../redux/hooks";
 import { IFilters, TODO_PRIORITY, TODO_STATUS } from "../../types";
 import { SearchTodo } from "./SearchTodo";
-import { StyledToggleButton } from "./StyledToggleButton";
+import { StyledToggleButtonGroup } from "./StyledToggleButtonGroup";
 
 interface Props {
   filters: IFilters;
 }
 
 export const TodoFilters: React.FC<Props> = ({ filters }) => {
-  const dispatch = useAppDispatch();
-
-  const clearFilters = () => {
-    dispatch(setFilters({}));
-  };
-
-  const handleSetStatus = (event: any) => {
-    dispatch(setFilters({ ...filters, status: event.target.value }));
-  };
-
-  const handleSetPriority = (event: any) => {
-    dispatch(setFilters({ ...filters, priority: event.target.value }));
-  };
+  const { setStatus, setPriority, clearFilters } = useFilters();
 
   return (
     <Box
+      display="flex"
+      flexWrap="wrap"
+      alignItems="center"
+      bgcolor="whitesmoke"
+      boxShadow={1}
+      py={1}
+      px={4}
+      mb={1}
       sx={(theme) => ({
-        py: 1,
-        px: 4,
-        mb: 1,
-        boxShadow: 1,
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        bgcolor: "whitesmoke",
         [theme.breakpoints.down("md")]: {
           px: 2,
         },
       })}
     >
-      <Box sx={{ flexGrow: 1 }}>
+      <Box
+        flexGrow={1}
+        sx={(theme) => ({
+          "& > div": {
+            pr: 3,
+          },
+          [theme.breakpoints.down("md")]: {
+            "& > div": {
+              pr: 2,
+            },
+          },
+        })}
+      >
         <IconButton
           sx={(theme) => ({
             pl: 0,
@@ -55,38 +54,18 @@ export const TodoFilters: React.FC<Props> = ({ filters }) => {
         >
           <FilterAltOff />
         </IconButton>
-
-        <ToggleButtonGroup
-          color="primary"
-          size="small"
+        <StyledToggleButtonGroup
           title="Status"
           value={filters.status}
-          exclusive
-          onChange={handleSetStatus}
-        >
-          {Object.values(TODO_STATUS).map((status) => (
-            <StyledToggleButton key={status} value={status} />
-          ))}
-        </ToggleButtonGroup>
-
-        <ToggleButtonGroup
-          color="primary"
-          size="small"
+          values={Object.values(TODO_STATUS)}
+          onChange={(e) => setStatus(e.target.value)}
+        />
+        <StyledToggleButtonGroup
           title="Priority"
-          exclusive
           value={filters.priority}
-          sx={(theme) => ({
-            ml: 3,
-            [theme.breakpoints.down("md")]: {
-              ml: 2,
-            },
-          })}
-          onChange={handleSetPriority}
-        >
-          {Object.values(TODO_PRIORITY).map((priority) => (
-            <StyledToggleButton key={priority} value={priority} />
-          ))}
-        </ToggleButtonGroup>
+          values={Object.values(TODO_PRIORITY)}
+          onChange={(e) => setPriority(e.target.value)}
+        />
       </Box>
       <SearchTodo />
     </Box>

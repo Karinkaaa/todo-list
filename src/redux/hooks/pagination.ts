@@ -1,5 +1,5 @@
 import { useAppDispatch } from ".";
-import { setLimit, setPage } from "../slice";
+import { setLimit, setPage } from "../slices/todo";
 
 export const usePagination = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
-import { ITodos, TODO_STATUS } from "../types";
+import { ITodos, TODO_STATUS } from "../../types";
 
 const getTodos = () => {
   try {

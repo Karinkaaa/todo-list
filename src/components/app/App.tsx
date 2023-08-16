@@ -4,7 +4,7 @@ import { TodoAppBar } from "../toolbar/TodoAppBar";
 
 export const App: React.FC = () => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box display="flex">
       <CssBaseline />
       <TodoAppBar />
       <TodoContainer />

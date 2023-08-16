@@ -1,17 +1,31 @@
 import { Add } from "@mui/icons-material";
-import { Box, Button, ClickAwayListener, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  ClickAwayListener,
+  MenuItem,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { v4 as uuid } from "uuid";
-import { useAppDispatch, useTodoNameRules } from "../../redux/hooks";
-import { addTodo } from "../../redux/slice";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useTodoNameRules,
+} from "../../redux/hooks";
+import { setIsOpen } from "../../redux/slices/modal";
+import { addTodo } from "../../redux/slices/todo";
 import { ITodoForm, TODO_PRIORITY } from "../../types";
 import { InputController } from "../controller/InputController";
 import { SelectController } from "../controller/SelectController";
 
 export const AddTodoForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.modal.isOpen);
   const rules = useTodoNameRules();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const {
     handleSubmit,
@@ -31,6 +45,7 @@ export const AddTodoForm: React.FC = () => {
     if (isValid) {
       dispatch(addTodo(data));
       reset();
+      isOpen && dispatch(setIsOpen(false));
     } else {
       setFocus("name");
     }
@@ -43,7 +58,11 @@ export const AddTodoForm: React.FC = () => {
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        style={{ display: "flex", margin: "0 0 16px" }}
+        style={{
+          display: "flex",
+          margin: "0 0 16px",
+          flexDirection: isMobile ? "column" : "row",
+        }}
       >
         <InputController
           name="name"
@@ -54,7 +73,7 @@ export const AddTodoForm: React.FC = () => {
           rules={rules}
           control={control}
         />
-        <Box sx={{ minWidth: 150, ml: 1 }}>
+        <Box minWidth={150} ml={isMobile ? 0 : 1}>
           <SelectController
             name="priority"
             label="Priority"
@@ -64,7 +83,7 @@ export const AddTodoForm: React.FC = () => {
             control={control}
           >
             {Object.values(TODO_PRIORITY).map((priority) => (
-              <MenuItem key={uuid()} value={priority}>
+              <MenuItem key={priority} value={priority}>
                 {priority}
               </MenuItem>
             ))}
@@ -74,7 +93,12 @@ export const AddTodoForm: React.FC = () => {
           type="submit"
           variant="contained"
           endIcon={<Add />}
-          sx={{ my: 1, ml: 1, minWidth: 100, height: 56 }}
+          sx={{
+            my: 1,
+            ml: isMobile ? 0 : 1,
+            height: 56,
+            minWidth: 100,
+          }}
         >
           Add
         </Button>

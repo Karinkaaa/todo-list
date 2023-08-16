@@ -1,6 +1,6 @@
 import { TextField, TextFieldProps } from "@mui/material";
 import React from "react";
-import { useController, UseControllerProps } from "react-hook-form";
+import { UseControllerProps, useController } from "react-hook-form";
 import { ITodoForm } from "../../types";
 
 interface Props {
@@ -43,11 +43,16 @@ export const SelectController: React.FC<
         },
         ...props.SelectProps,
       }}
-      sx={{
+      sx={(theme) => ({
         ".MuiSvgIcon-root": {
           display: disabled ? "none" : "visible",
         },
-      }}
+        [theme.breakpoints.down("sm")]: {
+          "&&& .MuiSelect-select": {
+            pr: disabled ? 0.5 : 3,
+          },
+        },
+      })}
       error={!!error}
       helperText={error?.message}
     />

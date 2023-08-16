@@ -10,9 +10,9 @@ interface Props {
 }
 
 export const TodoPagination: React.FC<Props> = ({ page, limit, count }) => {
-  const { changePage, changeRowsPerPage } = usePagination();
   const theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
+  const { changePage, changeRowsPerPage } = usePagination();
 
   return (
     <TablePagination

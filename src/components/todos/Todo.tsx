@@ -1,8 +1,15 @@
 import { Delete, DoneAll } from "@mui/icons-material";
-import { alpha, Checkbox, IconButton, ListItem } from "@mui/material";
+import {
+  Checkbox,
+  IconButton,
+  ListItem,
+  alpha,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { useAppDispatch } from "../../redux/hooks";
-import { editTodo, removeTodo } from "../../redux/slice";
+import { editTodo, removeTodo } from "../../redux/slices/todo";
 import { ITodo, TODO_STATUS } from "../../types";
 import { EditTodoForm } from "../form/EditTodoForm";
 
@@ -11,6 +18,8 @@ interface Props {
 }
 
 export const Todo: React.FC<Props> = ({ todo }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const dispatch = useAppDispatch();
   const isCompleted = todo.status === TODO_STATUS.COMPLETED;
 
@@ -33,6 +42,8 @@ export const Todo: React.FC<Props> = ({ todo }) => {
         bgcolor: isCompleted ? "primary.light" : "secondary.light",
         borderRadius: theme.shape.borderRadius,
         mb: 1,
+        px: isMobile ? 0.5 : 2,
+        py: isMobile ? 0.5 : 1,
         boxShadow: 1,
         "&:hover": {
           boxShadow: 5,
@@ -49,7 +60,7 @@ export const Todo: React.FC<Props> = ({ todo }) => {
         },
       })}
     >
-      <IconButton onClick={handleToggleCheckbox}>
+      <IconButton sx={{ p: isMobile ? 0 : 1 }} onClick={handleToggleCheckbox}>
         <Checkbox
           checked={isCompleted}
           checkedIcon={<DoneAll />}
@@ -57,7 +68,10 @@ export const Todo: React.FC<Props> = ({ todo }) => {
         />
       </IconButton>
       <EditTodoForm todo={todo} />
-      <IconButton sx={{ mr: 1 }} onClick={handleRemoveTodo}>
+      <IconButton
+        sx={{ mr: isMobile ? 0 : 1, pl: isMobile ? 0 : 1 }}
+        onClick={handleRemoveTodo}
+      >
         <Delete sx={{ color: "primary.dark" }} />
       </IconButton>
     </ListItem>

@@ -9,12 +9,12 @@ export const TodoHeader: React.FC = () => {
       <Typography
         component="div"
         sx={(theme) => ({
-          [theme.breakpoints.down("sm")]: { fontSize: "18px" },
-          [theme.breakpoints.up("sm")]: { fontSize: "20px" },
           display: "flex",
           alignItems: "center",
           flexGrow: 1,
           ml: 2,
+          [theme.breakpoints.down("sm")]: { fontSize: "18px" },
+          [theme.breakpoints.up("sm")]: { fontSize: "20px" },
         })}
       >
         Todo List

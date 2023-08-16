@@ -17,9 +17,9 @@ export const TodoList: React.FC<Props> = ({ todos }) => {
 
   return (
     <List>
-      {todos
-        .slice(page * limit, page * limit + limit)
-        .map((todo) => todo && <Todo key={uuid()} todo={todo} />)}
+      {todos.slice(page * limit, page * limit + limit).map((todo) => (
+        <Todo key={todo.id} todo={todo} />
+      ))}
       {emptyRows > 0 && (
         <ListItem key={uuid()} sx={{ height: emptyRows * 86 }}></ListItem>
       )}

@@ -4,7 +4,7 @@ import { Box, Chip, IconButton, ListItemText, MenuItem } from "@mui/material";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useTodoNameRules } from "../../redux/hooks";
-import { editTodo } from "../../redux/slice";
+import { editTodo } from "../../redux/slices/todo";
 import { ITodo, ITodoForm, TODO_PRIORITY, TODO_STATUS } from "../../types";
 import { InputController } from "../controller/InputController";
 import { SelectController } from "../controller/SelectController";
@@ -94,7 +94,14 @@ export const EditTodoForm: React.FC<Props> = ({ todo }) => {
             control={control}
           />
         </ListItemText>
-        <Box sx={{ ml: 2 }}>
+        <Box
+          sx={(theme) => ({
+            ml: 2,
+            [theme.breakpoints.down("sm")]: {
+              ml: 1,
+            },
+          })}
+        >
           <SelectController
             name="priority"
             variant="standard"
