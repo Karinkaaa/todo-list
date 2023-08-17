@@ -1,4 +1,4 @@
-import { Delete, DoneAll } from "@mui/icons-material";
+import { Delete, Done } from "@mui/icons-material";
 import {
   Checkbox,
   IconButton,
@@ -63,7 +63,7 @@ export const Todo: React.FC<Props> = ({ todo }) => {
       <IconButton sx={{ p: isMobile ? 0 : 1 }} onClick={handleToggleCheckbox}>
         <Checkbox
           checked={isCompleted}
-          checkedIcon={<DoneAll />}
+          checkedIcon={<Done />}
           sx={{ color: isCompleted ? "primary.main" : "secondary.main" }}
         />
       </IconButton>
