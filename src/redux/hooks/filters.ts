@@ -11,11 +11,21 @@ export const useFilters = () => {
   };
 
   const setStatus = (status: StatusType) => {
-    dispatch(setFilters({ ...filters, status }));
+    if (filters.status && filters.status === status) {
+      const { status, ...rest } = filters;
+      dispatch(setFilters({ ...rest }));
+    } else {
+      dispatch(setFilters({ ...filters, status }));
+    }
   };
 
   const setPriority = (priority: PriorityType) => {
-    dispatch(setFilters({ ...filters, priority }));
+    if (filters.priority && filters.priority === priority) {
+      const { priority, ...rest } = filters;
+      dispatch(setFilters({ ...rest }));
+    } else {
+      dispatch(setFilters({ ...filters, priority }));
+    }
   };
 
   const setSearchName = (name: string) => {
