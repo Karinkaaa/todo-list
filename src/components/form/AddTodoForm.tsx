@@ -61,6 +61,7 @@ export const AddTodoForm: React.FC = () => {
         style={{
           display: "flex",
           margin: "0 0 16px",
+          height: 80,
           flexDirection: isMobile ? "column" : "row",
         }}
       >
