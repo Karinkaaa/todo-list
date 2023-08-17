@@ -94,7 +94,7 @@ export const AddTodoForm: React.FC = () => {
           variant="contained"
           endIcon={<Add />}
           sx={{
-            my: 1,
+            mt: isMobile ? 2 : 1,
             ml: isMobile ? 0 : 1,
             height: 56,
             minWidth: 100,

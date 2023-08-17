@@ -1,3 +1,5 @@
+import { Close } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -21,7 +23,7 @@ export const AddTodoModal = () => {
     <div>
       <Button
         fullWidth
-        variant="outlined" 
+        variant="outlined"
         sx={{ mb: 1, height: 56 }}
         onClick={handleOpen}
       >
@@ -35,9 +37,16 @@ export const AddTodoModal = () => {
           boxShadow={15}
           m={1}
           px={3}
-          pt={3}
-          pb={1}
+          py={1}
         >
+          <Box textAlign="end">
+            <IconButton
+              sx={{ pr: 0, color: "text.disabled" }}
+              onClick={handleClose}
+            >
+              <Close />
+            </IconButton>
+          </Box>
           <AddTodoForm />
         </Box>
       </Modal>
