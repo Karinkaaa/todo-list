@@ -20,7 +20,7 @@ export const TodoFilters: React.FC<Props> = ({ filters }) => {
       alignItems="center"
       bgcolor="whitesmoke"
       boxShadow={1}
-      py={1}
+      py={2}
       px={4}
       mb={1}
       sx={(theme) => ({
